@@ -220,7 +220,7 @@ ISC
 
 ## 👤 Author
 
-Jonas Schmedtmann
+Jatin Paridal
 
 2. **[PRACTICAL_EXAMPLES.md](PRACTICAL_EXAMPLES.md)** - See how things work
 3. Specific route/model/controller docs as needed

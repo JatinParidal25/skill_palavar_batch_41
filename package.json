@@ -13,7 +13,7 @@
     "delete-data": "node dev-data/data/import-dev-data.js --delete",
     "test": "cross-env NODE_ENV=test jest --watchAll"
   },
-  "author": "Jonas Schmedtmann",
+  "author": "Jation Paridal",
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
