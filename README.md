@@ -1,103 +1,181 @@
-# Natour's Project - Complete Documentation
+# Natours - Tour Booking Application
 
 ## 📝 Project Description
 
-**Natour's** is a production-ready RESTful API for a tour booking application built with Node.js, Express, and MongoDB. It features 28 endpoints for tour management, user authentication (JWT), reviews with automatic rating calculations, geospatial queries for location-based search, and enterprise-level security including rate limiting, data sanitization, and XSS protection. The project follows MVC architecture with factory patterns, role-based access control, and comprehensive error handling.
+**Natours** is a full-stack tour booking application built with Node.js, Express, and MongoDB. It provides a complete REST API with server-side rendered views using Pug templates. The application features tour management, user authentication with JWT, reviews system, and comprehensive security measures including rate limiting, data sanitization, and XSS protection.
 
 ---
 
-## ✅ Comprehensive Documentation for Long-term Maintenance
+## 🚀 Quick Start
 
-Your Natour's project now has **complete, detailed documentation** that explains every technical concept, pattern, and implementation detail. Whether you return to this project after days, weeks, or months, this documentation will help you understand and work with the codebase immediately.
+### Prerequisites
 
----
+- Node.js (v14+)
+- MongoDB
+- npm or yarn
 
-## 🎯 **RETURNING AFTER A BREAK? START HERE!**
+### Installation
 
-### **[📖 MASTER_GUIDE.md](MASTER_GUIDE.md)** ⭐ START HERE FIRST!
+```bash
+npm install
+```
 
-**The ultimate quick-start guide when returning to the project.**
+### Environment Setup
 
-**Contains:**
-
-- ⚡ Quick project orientation
-- 🚀 How to run the project immediately
-- 🗺️ Project structure overview
-- 💡 Core concepts at a glance
-- 🛠️ Common tasks (adding routes, fields, debugging)
-- 📊 All endpoints summarized
-- 🐛 Troubleshooting guide
-- 🎓 Learning path for new contributors
-
-**Read this when:** Coming back after months, need quick orientation, want overview
-
----
-
-## 📁 Documentation Structure (20 Files!)
+Create a `config.env` file in the root directory:
 
 ```
-doc/
-├── README.md (this file) ..................... Documentation overview & navigation
-├── MASTER_GUIDE.md (⭐ START HERE!) .......... Quick orientation when returning
-├── INDEX.md ................................... Complete documentation index
-├── QUICK_START.md ............................. "I want to..." quick reference
-├── ARCHITECTURE.md ............................ Project architecture overview
-├── TECHNICAL_CONCEPTS.md (new) ................ Deep dive into technical concepts
-├── SETUP_AND_MIDDLEWARE.md (new) .............. app.js & server.js explained
-├── UTILITIES.md (new) ......................... All utility functions explained
-├── PRACTICAL_EXAMPLES.md ...................... Real-world usage examples
-├── controllerDocs/
-│   ├── handlerFactory.md ...................... Reusable CRUD patterns
-│   ├── authController.md ...................... Authentication functions
-│   ├── tourController.md ...................... Tour handlers
-│   ├── userController.md ...................... User handlers
-│   ├── reviewController.md .................... Review handlers
-│   └── errorController.md ..................... Error handling
-├── modelDocs/
-│   ├── tourModel.md ........................... Tour data structure
-│   ├── userModel.md ........................... User data & auth
-│   └── reviewModel.md ......................... Review data & hooks
-└── routesDocs/
-    ├── tourRoutes.md .......................... All tour endpoints
-    ├── userRoutes.md .......................... All user endpoints
-    └── reviewRoutes.md ........................ All review endpoints
+NODE_ENV=development
+PORT=3000
+DATABASE=mongodb://localhost:27017/natours
+DATABASE_PASSWORD=your_password
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRES_IN=90d
+```
+
+### Running the Project
+
+**Development:**
+
+```bash
+npm start
+```
+
+**Production:**
+
+```bash
+npm run start:prod
+```
+
+**Debug Mode:**
+
+```bash
+npm run debug
+```
+
+**Tests:**
+
+```bash
+npm test
 ```
 
 ---
 
-## 🎯 Where to Start
+## 📁 Project Structure
 
-### First Time or Returning After Months?
+```
+.
+├── controllers/            # Business logic & route handlers
+│   ├── authController.js   # Authentication & authorization
+│   ├── tourController.js   # Tour management
+│   ├── userController.js   # User management
+│   ├── reviewController.js # Review handlers
+│   ├── viewsController.js  # Render views
+│   ├── errorController.js  # Global error handling
+│   └── handlerFactory.js   # Reusable CRUD operations
+├── models/                 # Mongoose schemas
+│   ├── tourModel.js        # Tour data model
+│   ├── userModel.js        # User data model with auth
+│   └── reviewModel.js      # Review data model
+├── routes/                 # API route definitions
+│   ├── tourRoutes.js       # Tour endpoints
+│   ├── userRoutes.js       # User/auth endpoints
+│   ├── reviewRoutes.js     # Review endpoints
+│   └── viewRoutes.js       # Server-rendered views
+├── views/                  # Pug templates
+│   ├── base.pug            # Base layout
+│   ├── overview.pug        # Tours listing
+│   ├── tour.pug            # Tour details page
+│   ├── login.pug           # Login page
+│   ├── account.pug         # User account page
+│   └── error.pug           # Error pages
+├── public/                 # Static files
+│   ├── css/                # Stylesheets
+│   ├── js/                 # Client-side JavaScript
+│   └── img/                # Images
+├── utils/                  # Utility functions
+├── tests/                  # Test files
+├── app.js                  # Express app setup
+├── server.js               # Server entry point
+└── config.env              # Environment variables
+```
 
-**Start with [MASTER_GUIDE.md](MASTER_GUIDE.md)!**
+---
 
-- Quick orientation and project overview
-- How to run the project immediately
-- Core concepts at a glance
-- Common tasks and troubleshooting
-- All endpoints summarized
+## 🎯 Key Features
 
-Then read:
+### API Endpoints
 
-1. **[QUICK_START.md](QUICK_START.md)** - Quick reference guide
-   - "I want to find..." index
-   - Fast lookup for specific features
+- **Tours:** CRUD operations, filtering, pagination, sorting
+- **Users:** Registration, login, password reset, profile management
+- **Reviews:** Create, read, update, delete reviews for tours
+- **Authentication:** JWT-based with role-based access control
 
-2. **[ARCHITECTURE.md](ARCHITECTURE.md)** - Project overview
-   - How everything connects
-   - Entity relationships
-   - Request/response flow
+### Security Features
 
-3. **[TECHNICAL_CONCEPTS.md](TECHNICAL_CONCEPTS.md)** - Understanding the tech
-   - Middleware explained
-   - Authentication & Authorization deep dive
-   - Mongoose & MongoDB concepts
-   - Security patterns
-   - Code patterns & best practices
+- Helmet for HTTP headers protection
+- Rate limiting to prevent brute-force attacks
+- MongoDB sanitization against NoSQL injection
+- XSS protection with xss-clean
+- HPP (HTTP Parameter Pollution) protection
+- Password encryption with bcryptjs
+- JWT token validation
 
-### Working on Specific Features?
+### Frontend Features
 
-1. **[INDEX.md](INDEX.md)** - Complete documentation index
+- Server-side rendering with Pug templates
+- Forms for login and tour booking
+- User account management page
+- Tour details and reviews display
+
+---
+
+## 📚 Available Scripts
+
+```bash
+npm start              # Run development server with nodemon
+npm run start:prod     # Run production server
+npm run debug          # Debug with ndb
+npm run watch:js       # Watch and bundle client JS
+npm run build:js       # Build client JS
+npm test               # Run test suite
+npm run import-data    # Import dev sample data
+npm run delete-data    # Delete all data
+```
+
+---
+
+## 🛠️ Technology Stack
+
+**Backend:**
+
+- Node.js
+- Express.js
+- MongoDB & Mongoose
+- JWT (JSON Web Tokens)
+- Bcryptjs (password hashing)
+
+**Frontend:**
+
+- Pug (template engine)
+- CSS
+- JavaScript (Parcel bundler)
+
+**Development Tools:**
+
+- Nodemon (auto-reload)
+- ESLint (code quality)
+- Jest (testing)
+- NDB (debugging)
+
+**Security:**
+
+- Helmet
+- Express-rate-limit
+- Express-mongo-sanitize
+- XSS-clean
+- HPP
+
 2. **[PRACTICAL_EXAMPLES.md](PRACTICAL_EXAMPLES.md)** - See how things work
 3. Specific route/model/controller docs as needed
 
