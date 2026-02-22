@@ -1,16 +1,12 @@
 # Natours - Tour Booking Application
 
-## 📝 Project Description
-
-**Natours** is a full-stack tour booking application built with Node.js, Express, and MongoDB. It provides a complete REST API with server-side rendered views using Pug templates. The application features tour management, user authentication with JWT, reviews system, and comprehensive security measures including rate limiting, data sanitization, and XSS protection.
-
----
+A full-stack tour booking application built with Node.js, Express, and MongoDB. The application provides a complete REST API with server-side rendered views, user authentication, tour management, and reviews system.
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js (v14+)
+- Node.js v14+
 - MongoDB
 - npm or yarn
 
@@ -24,126 +20,125 @@ npm install
 
 Create a `config.env` file in the root directory:
 
-```
+```env
 NODE_ENV=development
 PORT=3000
 DATABASE=mongodb://localhost:27017/natours
 DATABASE_PASSWORD=your_password
-JWT_SECRET=your_jwt_secret_key
+JWT_SECRET=your_jwt_secret_key_here
 JWT_EXPIRES_IN=90d
+EMAIL_USERNAME=your_email
+EMAIL_PASSWORD=your_email_password
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
 ```
 
 ### Running the Project
 
-**Development:**
-
 ```bash
+# Development mode
 npm start
-```
 
-**Production:**
-
-```bash
+# Production mode
 npm run start:prod
-```
 
-**Debug Mode:**
-
-```bash
+# Debug mode
 npm run debug
-```
 
-**Tests:**
-
-```bash
+# Run tests
 npm test
 ```
-
----
 
 ## 📁 Project Structure
 
 ```
 .
-├── controllers/            # Business logic & route handlers
-│   ├── authController.js   # Authentication & authorization
-│   ├── tourController.js   # Tour management
-│   ├── userController.js   # User management
-│   ├── reviewController.js # Review handlers
-│   ├── viewsController.js  # Render views
-│   ├── errorController.js  # Global error handling
-│   └── handlerFactory.js   # Reusable CRUD operations
-├── models/                 # Mongoose schemas
-│   ├── tourModel.js        # Tour data model
-│   ├── userModel.js        # User data model with auth
-│   └── reviewModel.js      # Review data model
-├── routes/                 # API route definitions
-│   ├── tourRoutes.js       # Tour endpoints
-│   ├── userRoutes.js       # User/auth endpoints
-│   ├── reviewRoutes.js     # Review endpoints
-│   └── viewRoutes.js       # Server-rendered views
-├── views/                  # Pug templates
-│   ├── base.pug            # Base layout
-│   ├── overview.pug        # Tours listing
-│   ├── tour.pug            # Tour details page
-│   ├── login.pug           # Login page
-│   ├── account.pug         # User account page
-│   └── error.pug           # Error pages
-├── public/                 # Static files
-│   ├── css/                # Stylesheets
-│   ├── js/                 # Client-side JavaScript
-│   └── img/                # Images
-├── utils/                  # Utility functions
-├── tests/                  # Test files
-├── app.js                  # Express app setup
-├── server.js               # Server entry point
-└── config.env              # Environment variables
+├── controllers/          # Business logic & request handlers
+│   ├── authController.js
+│   ├── tourController.js
+│   ├── userController.js
+│   ├── reviewController.js
+│   ├── viewsController.js
+│   ├── errorController.js
+│   └── handlerFactory.js (reusable CRUD operations)
+├── models/              # Mongoose schemas
+│   ├── tourModel.js
+│   ├── userModel.js
+│   └── reviewModel.js
+├── routes/              # API route definitions
+│   ├── tourRoutes.js
+│   ├── userRoutes.js
+│   ├── reviewRoutes.js
+│   └── viewRoutes.js
+├── views/               # Pug templates
+│   ├── base.pug         # Base layout
+│   ├── overview.pug     # Tours listing page
+│   ├── tour.pug         # Tour detail page
+│   ├── login.pug        # Login page
+│   ├── account.pug      # User account page
+│   └── error.pug        # Error pages
+├── public/              # Static files
+│   ├── css/             # Stylesheets
+│   ├── js/              # Client-side scripts
+│   └── img/             # Images
+├── utils/               # Utility functions
+├── tests/               # Test files
+├── app.js               # Express app configuration
+└── server.js            # Server entry point
 ```
 
----
+## ⚙️ Key Features
 
-## 🎯 Key Features
+### Authentication & Authorization
 
-### API Endpoints
+- JWT-based authentication
+- Password reset via email
+- Role-based access control (admin, guide, user)
+- Protected routes and endpoints
 
-- **Tours:** CRUD operations, filtering, pagination, sorting
-- **Users:** Registration, login, password reset, profile management
-- **Reviews:** Create, read, update, delete reviews for tours
-- **Authentication:** JWT-based with role-based access control
+### Tour Management
 
-### Security Features
+- CRUD operations for tours
+- Advanced filtering and pagination
+- Sorting by price, rating, duration
+- Full-text search capabilities
 
-- Helmet for HTTP headers protection
-- Rate limiting to prevent brute-force attacks
-- MongoDB sanitization against NoSQL injection
-- XSS protection with xss-clean
+### Reviews System
+
+- Users can review tours
+- Rating calculations
+- Review pagination
+- Admin moderation
+
+### Security
+
+- Helmet - HTTP header security
+- Rate limiting - prevent brute-force attacks
+- MongoDB injection prevention
+- XSS protection
 - HPP (HTTP Parameter Pollution) protection
 - Password encryption with bcryptjs
-- JWT token validation
 
-### Frontend Features
+### Frontend
 
-- Server-side rendering with Pug templates
-- Forms for login and tour booking
-- User account management page
-- Tour details and reviews display
-
----
+- Server-side rendered pages with Pug
+- Responsive design
+- Form validation
+- User profile management
+- Tour booking interface
 
 ## 📚 Available Scripts
 
 ```bash
-npm start              # Run development server with nodemon
-npm run start:prod     # Run production server
-npm run debug          # Debug with ndb
-npm run watch:js       # Watch and bundle client JS
-npm run build:js       # Build client JS
-npm test               # Run test suite
-npm run import-data    # Import dev sample data
-npm run delete-data    # Delete all data
+npm start           # Development server with auto-reload
+npm run start:prod  # Production server
+npm run debug       # Debug with ndb
+npm run watch:js    # Watch and bundle JavaScript
+npm run build:js    # Build production JavaScript
+npm test            # Run test suite
+npm run import-data # Import sample data to MongoDB
+npm run delete-data # Delete all data from MongoDB
 ```
-
----
 
 ## 🛠️ Technology Stack
 
@@ -151,30 +146,81 @@ npm run delete-data    # Delete all data
 
 - Node.js
 - Express.js
-- MongoDB & Mongoose
-- JWT (JSON Web Tokens)
-- Bcryptjs (password hashing)
+- MongoDB & Mongoose ODM
+- JWT for authentication
+- Bcryptjs for password hashing
+- Nodemailer for emails
 
 **Frontend:**
 
-- Pug (template engine)
+- Pug template engine
 - CSS
-- JavaScript (Parcel bundler)
+- Vanilla JavaScript
+- Parcel bundler
 
-**Development Tools:**
+**Development:**
 
-- Nodemon (auto-reload)
+- Nodemon (auto-reload during development)
 - ESLint (code quality)
 - Jest (testing)
-- NDB (debugging)
+- NDB (Node debugger)
 
-**Security:**
+**Middleware & Security:**
 
-- Helmet
+- Helmet.js
 - Express-rate-limit
 - Express-mongo-sanitize
-- XSS-clean
-- HPP
+- xss-clean
+- hpp (HTTP Parameter Pollution protection)
+- Morgan (HTTP logging)
+
+## 📝 API Endpoints Summary
+
+### Tours
+
+- `GET /api/v1/tours` - Get all tours
+- `GET /api/v1/tours/:id` - Get tour details
+- `POST /api/v1/tours` - Create tour (admin)
+- `PATCH /api/v1/tours/:id` - Update tour (admin)
+- `DELETE /api/v1/tours/:id` - Delete tour (admin)
+
+### Users
+
+- `POST /api/v1/users/signup` - Register new user
+- `POST /api/v1/users/login` - Login user
+- `POST /api/v1/users/forgotPassword` - Request password reset
+- `PATCH /api/v1/users/resetPassword/:token` - Reset password
+- `PATCH /api/v1/users/updateMyPassword` - Change password
+- `GET /api/v1/users/me` - Get current user profile
+- `PATCH /api/v1/users/updateMe` - Update user profile
+
+### Reviews
+
+- `GET /api/v1/reviews` - Get all reviews
+- `POST /api/v1/reviews` - Create review
+- `PATCH /api/v1/reviews/:id` - Update review (admin)
+- `DELETE /api/v1/reviews/:id` - Delete review (admin)
+
+## 🎓 Learning Notes
+
+This project demonstrates:
+
+- MVC architecture pattern
+- RESTful API design principles
+- JWT authentication workflow
+- Mongoose ODM best practices
+- Factory pattern for reusable handlers
+- Error handling and validation
+- Security best practices in Node.js
+- Server-side rendering with templates
+
+## 📄 License
+
+ISC
+
+## 👤 Author
+
+Jonas Schmedtmann
 
 2. **[PRACTICAL_EXAMPLES.md](PRACTICAL_EXAMPLES.md)** - See how things work
 3. Specific route/model/controller docs as needed

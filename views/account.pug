@@ -1,0 +1,74 @@
+extends base
+include _reviewCard
+
+mixin navItem(link, text, icon, active, tab)
+  li(class=`${active ? 'side-nav--active' : ''}`)
+    a.nav-tab(href='#', data-tab=`${tab}`)
+      svg
+        use(xlink:href=`img/icons.svg#icon-${icon}`)
+      | #{text}
+
+block content
+  main.main
+    .user-view
+      nav.user-view__menu
+        ul.side-nav
+          //- li.side-nav--active
+          //-   a(href='#')
+          //-     svg
+          //-       use(xlink:href='img/icons.svg#icon-settings')
+          //-     | Settings
+          +navItem('#', 'Settings', 'settings', true, 'settings')
+          +navItem('#', 'My bookings', 'briefcase', false, 'bookings')
+          +navItem('#', 'My reviews', 'star', false, 'reviews')
+          +navItem('#', 'Billing', 'credit-card', false, 'billing')
+
+        - if(user.role == 'admin')  
+          .admin-nav
+            h5.admin-nav__heading Admin
+            ul.side-nav
+              +navItem('#', 'Manage tour', 'credit-card', false, 'admin-tours')
+              +navItem('#', 'Manage users', 'users', false, 'admin-users')
+              +navItem('#', 'Manage reviews', 'star', false, 'admin-reviews')
+              +navItem('#', 'Manage bookings', 'briefcase', false, 'admin-bookings')
+
+      .user-view__content
+        .settings-section.user-view__form-container
+          h2.heading-secondary.ma-bt-md Your account settings
+          //- Without api
+          //- form.form.form-user-data(action='/submit-user-data' method='POST')
+          form.form.form-user-data
+            .form__group
+              label.form__label(for='name') Name
+              input#name.form__input(type='text', value=`${user.name}`, required, name='name')
+            .form__group.ma-bt-md
+              label.form__label(for='email') Email address
+              input#email.form__input(type='email', value=`${user.email}`, required, name='email')
+            .form__group.form__photo-upload
+              img.form__user-photo(src=`/img/users/${user.photo}`, alt='User photo')
+              a.btn-text(href='') Choose new photo
+            .form__group.right
+              button.btn.btn--small.btn--green Save settings
+        .line &nbsp;
+        .settings-section.user-view__form-container
+          h2.heading-secondary.ma-bt-md Password change
+          form.form.form-user-password
+            .form__group
+              label.form__label(for='password-current') Current password
+              input#password-current.form__input(type='password', placeholder='••••••••', required, minlength='8')
+            .form__group
+              label.form__label(for='password') New password
+              input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+            .form__group.ma-bt-lg
+              label.form__label(for='password-confirm') Confirm password
+              input#password-confirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
+            .form__group.right
+              button.btn.btn--small.btn--green.btn--save-password Save password
+        #reviews-container.user-view__form-container(style='display: none;')
+          h2.heading-secondary.ma-bt-md My Reviews
+          .reviews#my-reviews-list
+            p.loading-message Loading your reviews...
+
+    //- Hidden element to expose user ID to JavaScript
+    - if(user)
+      script(type='application/json' id='user-data')!= JSON.stringify({id: user._id})
